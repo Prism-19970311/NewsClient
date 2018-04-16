@@ -1,6 +1,7 @@
 package com.prism.newsclient_project_1.sourceOP;
 
 import com.prism.newsclient_project_1.SourceProvider.ISource;
+import com.prism.newsclient_project_1.exception.ErrorResponseCodeException;
 
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -24,10 +25,9 @@ public class HttpStreamOP implements ISource{
         int code = conn.getResponseCode();
         if (code == 200) {
             in = conn.getInputStream();
-
+        }else {
+            throw new ErrorResponseCodeException("error is response code is" + code);
         }
-
-
         return in;
     }
 }
